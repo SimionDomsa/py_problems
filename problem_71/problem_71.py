@@ -1,3 +1,17 @@
+#You have a Student entity which has a name and an id. Create an application where you can
+
+#add new students,
+#display students
+#and remove students from a list.
+#Remove the student based on the id;
+
+#workflow:
+
+#add 3 students,
+#display all students,
+#remove student with id 2,
+#display all students.
+
 student = {}
 
 n = input("How many students do you want to add? ")
