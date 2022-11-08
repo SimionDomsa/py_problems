@@ -1,4 +1,9 @@
-# here I divided the dictionary into 2 lists and accessed the teachers from there
+#7.2 You have a Course entity which has id, course name and teacher name. Create a program where you can
+
+#display all the courses,
+#add a new course,
+#search and remove a course by id
+#display all the courses where there's a specific teacher
 
 from collections import defaultdict
 import pprint
@@ -16,7 +21,7 @@ courses = {
 pprint.pprint(courses)
 user_input = input("Would you like to add a new course? (yes/no): ")
 if user_input == "yes":
-    id_course = input("Enter course's id: ")
+    id_course = int(input("Enter course's id: "))
     name_course = input("Enter course: ")
     teach_name = input("Enter teacher's name: ")
     courses[id_course] = [name_course, teach_name]
@@ -40,13 +45,11 @@ elif user_input == "no":
 
 new_list = list(courses.values())
 
-newdict = {}
 list1 = []
 list2 = []
 for i in range(len(new_list)):
 	list1.append(new_list[i][0])
 	list2.append(new_list[i][1])
-	i=i+1
 #print(list1)
 #print(list2)
 
