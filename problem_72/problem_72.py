@@ -18,50 +18,68 @@ courses = {
 	777: ["economie", "donald trump"]
 }
 
-pprint.pprint(courses)
-user_input = input("Would you like to add a new course? (yes/no): ")
-if user_input == "yes":
-    id_course = int(input("Enter course's id: "))
-    name_course = input("Enter course: ")
-    teach_name = input("Enter teacher's name: ")
-    courses[id_course] = [name_course, teach_name]
-    print("The new courses list is:\n")
-    pprint.pprint(courses)
-elif user_input == "no":
-	print("The courses list remains unchanged.\n")
-	pprint.pprint(courses)
+# Display all the courses
+def print_courses():
+	print("Available courses: ")
+	for c in courses:
+		print(f"\t{c}\t{courses[c][0]}")
 
-user_input = input("Would you like to remove a course? (yes/no): ")
-if user_input == "yes":
-	n = input("What course id would you like removed?: ")
-	courses = {key:val for key, val in courses.items() if key != int(n)}
-	print("The new courses list is:\n")
-	pprint.pprint(courses)
-elif user_input == "no":
-    print("The courses list remains unchanged.\n")
-    pprint.pprint(courses)
+#display all the courses,
+print_courses()
 
+#add a new course,
+user_input = input("Would you like to add a new course? (y/N): ")
+if user_input in ['Y', 'y', 'yes']:
+	course_id = int(input("Enter course ID: "))
+	while course_id in courses:
+		print("Course ID already exists!")
+		course_id = int(input("Enter course ID: "))
+	course_name = input("Enter course name: ")
+	while True:
+		exists = False
+		for c in courses:
+			if course_name == courses[c][0]:
+				print("There already exists a course with that name!")
+				exists = True
+				break
+		if exists:
+			course_name = input("Enter course name: ")
+		else:
+			break
+	course_teacher = input("Enter teacher's name: ")
+	courses[course_id] = [course_name, course_teacher]
+else:
+	print("Course list remained unchanged.")
+	print_courses()
 
-
-new_list = list(courses.values())
-
-list1 = []
-list2 = []
-for i in range(len(new_list)):
-	list1.append(new_list[i][0])
-	list2.append(new_list[i][1])
-#print(list1)
-#print(list2)
-
-teach_set = set((list2))
-print(teach_set)
-n = input("What teacher are you interested in?: ")
-txt = n.lower()
-t_subject = []
-for i in range(len(list1)):
-	if txt == list2[i]:
-		t_subject.append(list1[i])
+#search and remove a course by id
+user_input = input("Would you like to remove a course? (y/N): ")
+if user_input in ['Y', 'y', 'yes']:
+	n = int(input("What course ID would you like to remove? "))
+	if n not in courses:
+		print("Course ID does not exist.")
 	else:
-		pass
-	i=i+1
-print("They teach: ", t_subject)
+		courses.pop(n)
+	print_courses()
+elif user_input == "no":
+	print("Course list remained unchanged.")
+	print_courses()
+
+#display all the courses where there's a specific teacher
+teachers = []
+print("Teachers:")
+for c in courses:
+	teachers.append(courses[c][1])
+	print(f"\t{courses[c][1]}")
+
+n = input("What teacher are you interested in? ")
+if n != '':
+	while n not in teachers:
+		n = input("What teacher are you interested in? ")
+
+	print("They teach: ")
+	for c in courses:
+		if n == courses[c][1]:
+			print(f"\t{courses[c][0]}")
+
+print("Goodbye!")
