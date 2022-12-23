@@ -28,7 +28,7 @@ def read_students(file_name):
 def create_student(line):
     student_id = int(line['student_id'])
     name = str(line['name'])
-    employed = True if (line['employed'])=='TRUE' else False
+    employed = True if (line['employed'])=='True' else False
     return Student(student_id, name, employed)
 
 def display_employed():
@@ -53,9 +53,28 @@ def update_status():
     user_input = input("What student has a new employment status? ")
     for student in students:
         if user_input == student.name:
-            print(student.employed)
             student.employed = not student.employed
-            print(student.employed)
+
+def delete_unemployed():
+    for student in students:
+        if student.employed == False:
+            students.remove(student)
+
+def delete_student():
+    display_all()
+    user_input = input("What student would you like to remove? ")
+    for student in students:
+        if user_input == student.name:
+            students.remove(student)
+
+def write_students(file_name):
+    with open(file_name, 'w', newline='') as fd:
+        fieldnames = ['student_id','name','employed']
+        csv_writer = csv.DictWriter(fd, fieldnames=fieldnames, delimiter=',')
+        csv_writer.writeheader()
+        for student in students:
+            csv_writer.writerow({'student_id':student.student_id, 'name':student.name, 'employed':student.employed})
+
 
 read_students('students.csv')
 print("These are all the students: ")
@@ -72,3 +91,14 @@ if user_input in ['y','yes','Yes']:
 user_input = input("Would you like to change the employed status of a student? (y/N) ")
 if user_input in ['y','yes','Yes']:
     update_status()
+
+user_input = input("Would you like to remove unemployed students? (y/N) ")
+if user_input in ['y','yes','Yes']:
+    delete_unemployed()
+
+user_input = input("Would you like to remove a certain student? (y/N) ")
+if user_input in ['y','yes','Yes']:
+    delete_student()
+
+write_students('students.csv')
+print("\nGoodbye!")
