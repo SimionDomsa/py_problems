@@ -1,4 +1,5 @@
 student_id,name,employed
-111,Larisa,TRUE
-222,Simion,FALSE
-333,Ingrid,TRUE
+111,Larisa,True
+222,Simion,False
+333,Ingrid,True
+444,Andrei,True
