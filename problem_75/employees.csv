@@ -1,5 +1,9 @@
 employee_id,name,salary,projects
 111,Smith,50000,Aerodynamics
-222,Jameson,65000,Bourne
-333,Fergus,45000,Crimson
+222,Jameson,65000,Bourne`Electricity
+333,Fergus,45000,Crimson`Dark matter
 444,Solici,90000,Dark matter
+555,Igor,60000,Electricity
+666,Mike,45000,Bourne
+777,Carlos,50000,`Dark matter
+999,Larisa,99999,Uciderea vecinilor

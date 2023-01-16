@@ -1,0 +1,50 @@
+[
+    {
+        "employee_id": 111,
+        "name": "Smith",
+        "salary": 50000,
+        "projects": [
+            "Aerodynamics,Bourne,Crimson"
+        ]
+    },
+    {
+        "employee_id": 222,
+        "name": "Jameson",
+        "salary": 65000,
+        "projects": [
+            "Bourne,Crimson"
+        ]
+    },
+    {
+        "employee_id": 333,
+        "name": "Fergus",
+        "salary": 45000,
+        "projects": [
+            "Crimson"
+        ]
+    },
+    {
+        "employee_id": 444,
+        "name": "Solici",
+        "salary": 90000,
+        "projects": [
+            "Dark matter"
+        ]
+    },
+    {
+        "employee_id": 555,
+        "name": "Igor",
+        "salary": 40000,
+        "projects": [
+            "Electricity"
+        ]
+    },
+    {
+        "employee_id": 666,
+        "name": "Charlie",
+        "salary": 35000,
+        "projects": [
+            "Fusion"
+        ]
+    }
+]

@@ -46,7 +46,15 @@ def read_projects_csv(file_name):
 		csv_reader = csv.DictReader(csv_proj)
 		for line in csv_reader:
 			projects.append(create_project(line))
-			satisfactory.append(line['project_name'])
+			if avg_grade(line['grades'].split('`'))>=8:
+				satisfactory.append(line['project_name'])
+
+def create_project(line):
+	project_id = line['project_id']
+	project_name = line['project_name']
+	grades = line['grades'].split('`')
+	flag = line['flag']
+	return Project(project_id, project_name, grades, flag)
 
 def avg_grade(num):
 	sum_grades = 0
@@ -54,13 +62,6 @@ def avg_grade(num):
 		sum_grades += int(x)
 	avg = sum_grades / len(num)
 	return avg
-
-def create_project(line):
-	project_id = line['project_id']
-	project_name = line['project_name']
-	grades = line['grades'].split(',')
-	flag = line['flag']
-	return Project(project_id, project_name, grades, flag)
 
 def read_employee_csv(file_name):
 	with open(file_name, 'r') as csv_empl:
@@ -72,7 +73,7 @@ def create_employee(line):
 	employee_id = line['employee_id']
 	name = line['name']
 	salary = line['salary']
-	projects = line['projects'].split(',')
+	projects = line['projects'].split('`')
 	return Employee(employee_id, name, salary, projects)
 
 # display all employees:
@@ -91,12 +92,12 @@ def add_employee():
 	employees.append(new_employee)
 
 def write_employee(file_name):
-	with open(file_name, 'w') as csv_file:
+	with open(file_name, 'w', newline='') as csv_file:
 		fieldnames = ['employee_id', 'name', 'salary', 'projects']
 		csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames, delimiter=',')
 		csv_writer.writeheader()
 		for employee in employees:
-			csv_writer.writerow({'employee_id':employee.employee_id,'name':employee.name,'salary':employee.salary,'projects':employee.projects})
+			csv_writer.writerow({'employee_id':employee.employee_id,'name':employee.name,'salary':employee.salary,'projects':'`'.join(employee.projects)})
 
 # display all projects:
 def display_all_projects():
@@ -114,23 +115,23 @@ def add_project():
 	projects.append(new_project)
 
 def write_project(file_name):
-	with open(file_name, 'w') as csv_file:
+	with open(file_name, 'w', newline='') as csv_file:
 		fieldnames = ['project_id', 'project_name', 'grades', 'flag']
 		csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames, delimiter=',')
 		csv_writer.writeheader()
 		for project in projects:
-			csv_writer.writerow({'project_id':project.project_id,'project_name':project.project_name,'grades':project.grades,'flag':project.flag})
+			csv_writer.writerow({'project_id':project.project_id,'project_name':project.project_name,'grades':'`'.join(project.grades),'flag':project.flag})
 
-# # remove project based on id:
-# def remove_project():
-# 	del_proj = input("What is the ID of the project you want to remove? ")
-# 	with open('projects.csv', 'r') as csv_proj:
-# 		csv_reader = csv.DictReader(csv_proj)
-# 		with open('projects_test.csv', 'w', newline='') as new_csv:
-# 			csv_writer = csv.writer(new_csv, delimiter=',')
-# 			for line in csv_reader:
-# 				if line['project_id'] != del_proj:
-# 					csv_writer.writerow(line)
+# remove project based on id:
+def remove_project():
+	del_proj = input("What is the ID of the project you want to remove? ")
+	with open('projects.csv', 'r') as csv_proj:
+		csv_reader = csv.DictReader(csv_proj)
+		with open('projects_test.csv', 'w', newline='') as new_csv:
+			csv_writer = csv.writer(new_csv, delimiter=',')
+			for line in csv_reader:
+				if line['project_id'] != del_proj:
+					csv_writer.writerow(line)
 
 # show projects that have a satisfactory grade
 def display_satisfactory():
@@ -150,6 +151,7 @@ def add_grade():
 				if project in satisfactory:
 					satisfactory.remove(project)
 			else:
+				project.flag = True
 				if project not in satisfactory:
 					satisfactory.append(project)
 		
@@ -161,26 +163,6 @@ def add_proj_to_empl():
 	for employee in employees:
 		if employee.name == user_input:
 			employee.projects.append(added_proj)
-
-# def write_employees_csv():
-# 	with open('employees_test.csv', 'r') as in_file:
-# 		csv_reader = csv.DictReader(in_file)
-# 		with open('employees.csv', 'w') as out_file:
-# 			fieldnames = ['employee_id','name','salary','projects']
-# 			csv_writer = csv.DictWriter(out_file, fieldnames=fieldnames, delimiter=',')
-# 			csv_writer.writeheader()
-# 			for line in csv_reader:
-# 				csv_writer.writerow(line)
-
-# def write_projects_csv():
-# 	with open('projects_test.csv', 'r') as in_file:
-# 		csv_reader = csv.DictReader(in_file)
-# 		with open('projects.csv', 'w') as out_file:
-# 			fieldnames = ['project_id','project_name','grades','flag']
-# 			csv_writer = csv.DictWriter(out_file, fieldnames=fieldnames, delimiter=',')
-# 			csv_writer.writeheader()
-# 			for line in csv_reader:
-# 				csv_writer.writerow(line)
 
 read_employee_csv('employees.csv')
 read_projects_csv('projects.csv')
@@ -209,7 +191,5 @@ if user_input in ['y', 'yes', 'Yes']:
 
 write_employee('employees.csv')
 write_project('projects.csv')
-# write_employees_csv()
-# write_projects_csv()
 
 print("\nGoodbye!")

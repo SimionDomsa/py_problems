@@ -1,5 +1,7 @@
 project_id,project_name,grades,flag
-123000,Aerodynamics,8,TRUE
+123000,Aerodynamics,8`6`10`7`10,True
 234000,Bourne,8,TRUE
 345000,Crimson,8,TRUE
 456000,Dark matter,8,TRUE
+567000,Electricity,8`10,True
+678000,Uciderea vecinilor,8`10,True

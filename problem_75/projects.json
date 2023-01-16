@@ -1,0 +1,53 @@
+[
+    {
+        "project_id": 123000,
+        "project_name": "Aerodynamics",
+        "grades": [
+            8,
+            10,
+            4
+        ],
+        "flag": false
+    },
+    {
+        "project_id": 234000,
+        "project_name": "Bourne",
+        "grades": [
+            8
+        ],
+        "flag": true
+    },
+    {
+        "project_id": 345000,
+        "project_name": "Crimson",
+        "grades": [
+            8
+        ],
+        "flag": true
+    },
+    {
+        "project_id": 456000,
+        "project_name": "Solici",
+        "grades": [
+            8
+        ],
+        "flag": true
+    },
+    {
+        "project_id": 567000,
+        "project_name": "Electricity",
+        "grades": [
+            8
+        ],
+        "flag": true
+    },
+    {
+        "project_id": 678000,
+        "project_name": "Fusion",
+        "grades": [
+            8,
+            6
+        ],
+        "flag": false
+    }
+]
