@@ -22,7 +22,7 @@ courses = {
 def print_courses():
 	print("Available courses: ")
 	for c in courses:
-		print(f"\t{c}\t{courses[c][0]}")
+		print(f"\t{c}\t{courses[c][0]} \t {courses[c][1]}")
 
 #display all the courses,
 print_courses()
